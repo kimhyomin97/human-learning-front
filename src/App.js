@@ -1,36 +1,26 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Header from "./component/Header";
+import LandingPage from "./component/LandingPage";
+import LoginPage from "./component/LoginPage";
 
 function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("/word/hello")
-      .then((response) => response.text())
-      .then((message) => {
-        setMessage(message);
-      });
+    // fetch 부분
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <h2>{message}</h2>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        {/* v6 문법 적용 */}
+        <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
