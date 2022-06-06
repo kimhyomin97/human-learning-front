@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Header from "./component/Header";
+import Header from "./component/Header/Header";
 import LandingPage from "./component/LandingPage";
 import LoginPage from "./component/LoginPage";
 
