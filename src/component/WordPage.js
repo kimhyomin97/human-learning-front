@@ -6,7 +6,7 @@ function WordPage() {
 
   useEffect(() => {
     // fetch 부분
-    http.get("/wordall").then((res) => {
+    http.get("/word/wordall").then((res) => {
       //   console.log(res);
       setWord(res.data);
     });

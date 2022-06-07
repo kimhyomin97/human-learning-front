@@ -20,12 +20,21 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 import { useStyles } from "./public/styles";
 import "./public/Header.css";
+// import { useSelector, useDispatch } from "react-redux";
 // import { AlignHorizontalLeftRounded } from '@mui/icons-material';
 
 // import LoginPage from "../LoginPage/LoginPage";
 // import logo from './public/logo.png';
 
 function Header({ history }) {
+  // // redux login info
+  // const loginInfo = useSelector((state) => state);
+  // const dispatch = useDispatch();
+  // console.log(loginInfo);
+
+  let sessionStorage = window.sessionStorage;
+  const loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -50,6 +59,16 @@ function Header({ history }) {
       alert("로그아웃 상황");
     }
   };
+
+  const session_logout = () => {
+    if (loginInfo != null) {
+      sessionStorage.removeItem("loginInfo");
+      alert("로그아웃 성공");
+      document.location.href = "/";
+    }
+    // 로그인 페이지로 분기할지 아닐지 결정
+  };
+
   const [login, setLogin] = useState(false);
   const move_login = () => {
     // return(
@@ -107,7 +126,7 @@ function Header({ history }) {
             <Typography variant="h6" noWrap>
               <a href="/">
                 {/* <img className = "header_logo" src={logo}/> */}
-                Join-delivery
+                Human-Learning
               </a>
             </Typography>
             {/* Homepage
@@ -161,11 +180,20 @@ function Header({ history }) {
           <br />
           <Divider />
 
-          <List>
-            <div className="header_item">
-              <a href="/login">로그인</a>
-            </div>
-          </List>
+          {!loginInfo ? (
+            <List>
+              <div className="header_item">
+                <a href="/login">로그인</a>
+              </div>
+            </List>
+          ) : (
+            <List>
+              <div className="header_item">
+                <div>{loginInfo.userid}님 안녕하세요</div>
+                <a onClick={session_logout}>로그아웃</a>
+              </div>
+            </List>
+          )}
           {/* {!localStorage.Kakao_token ? (
             <List>
               <div className="header_item">
