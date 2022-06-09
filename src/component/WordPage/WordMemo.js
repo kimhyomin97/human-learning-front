@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import http from "../api/http";
+import { useParams } from "react-router-dom";
+import http from "../../api/http";
 
-function WordPage() {
+function WordMemo({ match }) {
+  const params = useParams();
   const [word, setWord] = useState([]);
-
   useEffect(() => {
     // fetch 부분
-    http.get("/word/wordall").then((res) => {
+    http.get(`/word/${params.target}`).then((res) => {
       //   console.log(res);
       setWord(res.data);
     });
@@ -14,12 +15,11 @@ function WordPage() {
 
   return (
     <>
-      <div>this is Word Page</div>
-      <div>wordlist : </div>
+      <div>단어 외우기 페이지</div>
       {word.map((item, index) => {
         return (
           <div key={index}>
-            {item.eng} : {item.kor}
+            {item.eng} : <input type="text" />
           </div>
         );
       })}
@@ -27,4 +27,4 @@ function WordPage() {
   );
 }
 
-export default WordPage;
+export default WordMemo;

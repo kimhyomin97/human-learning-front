@@ -165,6 +165,9 @@ function Header({ history }) {
             <div className="header_item">
               <a href="/list">List</a>
             </div>
+            <div className="header_item">
+              <a href="/word">Word</a>
+            </div>
           </List>
           <br />
           <br />
