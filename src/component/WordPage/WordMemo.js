@@ -9,12 +9,17 @@ function WordMemo({ match }) {
   const [pageNum, setPageNum] = useState(0);
   const [visible, setVisible] = useState(false);
 
+  let sessionStorage = window.sessionStorage;
+  const loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
+
   useEffect(() => {
     // fetch 부분
-    http.get(`/word/wordlist?target=${params.target}`).then((res) => {
-      //   console.log(res);
-      setWord(res.data);
-    });
+    http
+      .get(`/word/wordlist?target=${params.target}&checkid=${loginInfo.userid}`)
+      .then((res) => {
+        console.log(res.data);
+        setWord(res.data);
+      });
   }, []);
 
   const leftBtn = () => {
@@ -34,10 +39,20 @@ function WordMemo({ match }) {
       {/* 카드 형식(한장씩 넘긴다) */}
       {pageNum + 1} / {word.length}
       <br />
-      {word[pageNum]?.eng} <br />
+      {word[pageNum]?.eng}
+      {word[pageNum]?.userid != null ? <span>✔</span> : <></>}
+      <br />
       <input type="text" /> <button onClick={visibleBtn}>확인</button>
       <br />
-      {visible == true ? word[pageNum]?.kor : <></>} <br />
+      {visible == true ? (
+        <>
+          {word[pageNum]?.kor}
+          <button>외움</button>
+        </>
+      ) : (
+        <></>
+      )}{" "}
+      <br />
       {pageNum > 0 ? <button onClick={leftBtn}>왼쪽</button> : <></>}
       {pageNum < word.length ? (
         <button onClick={rightBtn}>오른쪽</button>
