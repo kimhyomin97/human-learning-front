@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -47,35 +47,35 @@ function Header({ history }) {
     setOpen(false);
   };
 
-  const kakao_logout = () => {
-    if (window.Kakao.Auth.getAccessToken()) {
-      window.Kakao.Auth.logout(() => {
-        setLogin(false);
-        alert("로그아웃 성공");
-        localStorage.clear();
-        history.push("/");
-      });
-    } else {
-      alert("로그아웃 상황");
-    }
-  };
+  // const kakao_logout = () => {
+  //   if (window.Kakao.Auth.getAccessToken()) {
+  //     window.Kakao.Auth.logout(() => {
+  //       setLogin(false);
+  //       alert("로그아웃 성공");
+  //       localStorage.clear();
+  //       history.push("/");
+  //     });
+  //   } else {
+  //     alert("로그아웃 상황");
+  //   }
+  // };
 
-  const session_logout = () => {
-    if (loginInfo != null) {
-      sessionStorage.removeItem("loginInfo");
-      alert("로그아웃 성공");
-      document.location.href = "/";
-    }
-    // 로그인 페이지로 분기할지 아닐지 결정
-  };
+  // const session_logout = () => {
+  //   if (loginInfo != null) {
+  //     sessionStorage.removeItem("loginInfo");
+  //     alert("로그아웃 성공");
+  //     document.location.href = "/";
+  //   }
+  //   // 로그인 페이지로 분기할지 아닐지 결정
+  // };
 
-  const [login, setLogin] = useState(false);
-  const move_login = () => {
-    // return(
-    // <LoginPage></LoginPage>;
-    // )
-  };
-  const [user_account, setUser_account] = useState(null);
+  // const [login, setLogin] = useState(false);
+  // const move_login = () => {
+  //   // return(
+  //   // <LoginPage></LoginPage>;
+  //   // )
+  // };
+  // const [user_account, setUser_account] = useState(null);
   useEffect(() => {
     // 이부분 빈화면 에러
     // window.Kakao.API.request({
@@ -88,19 +88,19 @@ function Header({ history }) {
     // }, [login]);
   }, []);
 
-  const view_info = () => {
-    window.Kakao.API.request({
-      url: "/v2/user/me",
-      success: function ({ kakao_account }) {
-        const { age_range, profile } = kakao_account;
-      },
-      fail: function (error) {
-        console.log("실패");
-        console.log(error);
-      },
-    });
-  };
-  const [loginModal, setLoginModal] = useState(false);
+  // const view_info = () => {
+  //   window.Kakao.API.request({
+  //     url: "/v2/user/me",
+  //     success: function ({ kakao_account }) {
+  //       const { age_range, profile } = kakao_account;
+  //     },
+  //     fail: function (error) {
+  //       console.log("실패");
+  //       console.log(error);
+  //     },
+  //   });
+  // };
+  // const [loginModal, setLoginModal] = useState(false);
 
   return (
     <>
@@ -193,7 +193,7 @@ function Header({ history }) {
             <List>
               <div className="header_item">
                 <div>{loginInfo.userid}님 안녕하세요</div>
-                <a onClick={session_logout}>로그아웃</a>
+                {/* <a onClick={session_logout}>로그아웃</a> */}
               </div>
             </List>
           )}

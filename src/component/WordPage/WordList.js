@@ -11,6 +11,7 @@ function WordList({ match }) {
       //   console.log(res);
       setWord(res.data);
     });
+    // eslint-disable-next-line
   }, []);
 
   return (

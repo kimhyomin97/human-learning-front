@@ -20,6 +20,7 @@ function WordMemo({ match }) {
         console.log(res.data);
         setWord(res.data);
       });
+    // eslint-disable-next-line
   }, []);
 
   const leftBtn = () => {
@@ -34,6 +35,23 @@ function WordMemo({ match }) {
     setVisible(!visible);
   };
 
+  const checkWordBtn = () => {
+    http
+      .post(`/word/wordcheck`, {
+        wordid: word[pageNum].id,
+        userid: loginInfo.userid,
+      })
+      .then((res) => {
+        setWord(
+          word.map((item) =>
+            item.eng === word[pageNum]?.eng
+              ? { ...item, userid: loginInfo.userid }
+              : item
+          )
+        );
+      });
+  };
+
   return (
     <>
       {/* 카드 형식(한장씩 넘긴다) */}
@@ -44,10 +62,14 @@ function WordMemo({ match }) {
       <br />
       <input type="text" /> <button onClick={visibleBtn}>확인</button>
       <br />
-      {visible == true ? (
+      {visible === true ? (
         <>
           {word[pageNum]?.kor}
-          <button>외움</button>
+          {word[pageNum]?.userid != null ? (
+            <></> // 체크 해제하는 기능 구현하면 된다 -> db에 delete where 활용하면 된다
+          ) : (
+            <button onClick={checkWordBtn}>체크</button>
+          )}
         </>
       ) : (
         <></>

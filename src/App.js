@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./component/Header/Header";
 import LandingPage from "./component/LandingPage";
@@ -9,7 +9,7 @@ import WordMemo from "./component/WordPage/WordMemo";
 import WordPage from "./component/WordPage/WordPage";
 
 function App() {
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
 
   useEffect(() => {
     // fetch 부분

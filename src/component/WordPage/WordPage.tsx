@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import http from "../../api/http";
+import React from "react";
+// import { useState, useEffect } from "react";
+// import http from "../../api/http";
 
 function WordPage() {
   return (

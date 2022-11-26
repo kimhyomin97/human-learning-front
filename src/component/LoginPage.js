@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+// import axios from "axios";
+import { useState } from "react";
 import http from "../api/http";
 // import { useSelector, useDispatch } from "react-redux";
 
